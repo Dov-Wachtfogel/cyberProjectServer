@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_file
 import database
 from PIL import Image
 from img2vect import extract
+from OpenSSL import SSL
 app = Flask(__name__)
 
 
@@ -54,6 +55,13 @@ def new_account():
         else:
             return render_template('problem.html', prob = 'old user')
 
-
+@app.route('/favicon', methods = ['GET'])
+def favicon():
+    return send_file('mini-logo.png')
 if __name__ == '__main__':
-    app.run()
+    context = SSL.Context(SSL.SSLv3_METHOD)
+     #   ('server.crt', 'server.key')  # certificate and key files
+    context.use_privatekey_file('localhost.key')
+    context.use_certificate_file('localhost.crt')
+    app.run(ssl_context='adhoc', host='0.0.0.0', port=50100, debug=True)
+    # app.run()

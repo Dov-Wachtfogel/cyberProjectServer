@@ -15,4 +15,4 @@ def compare_2_vects(vect1: numpy.ndarray, vect2: numpy.ndarray):
 def compare_with_lst(vect:numpy.ndarray, vects_lst:list[numpy.ndarray]):
     a = sum([compare_2_vects(vect, i) for i in vects_lst])/len(vects_lst)
     print(a)
-    return a>40
+    return a>40 and a<200
