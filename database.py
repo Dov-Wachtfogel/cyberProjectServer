@@ -1,4 +1,3 @@
-from typing import List, Any
 import compare
 import mysql.connector
 from getpass import getpass
